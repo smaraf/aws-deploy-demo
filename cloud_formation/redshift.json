@@ -22,8 +22,8 @@
       "NodeType" : {
         "Description" : "The type of node to be provisioned",
         "Type" : "String",
-        "Default" : "ds2.xlarge",
-        "AllowedValues" : [ "ds2.xlarge", "ds2.8xlarge", "dc1.large", "dc1.8xlarge" ]
+        "Default" : "dc2.large",
+        "AllowedValues" : [ "ds2.xlarge", "ds2.8xlarge", "dc1.large", "dc1.8xlarge", "dc2.large", "dc2.8xlarge" ]
       }, 
       "MasterUsername" : {
         "Description" : "The user name that is associated with the master user account for the cluster that is being created. Must contain at leat one uppercase letter and digit.",
