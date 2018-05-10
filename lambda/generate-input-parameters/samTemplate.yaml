@@ -10,4 +10,3 @@ Resources:
       Runtime: nodejs6.10
       CodeUri: ./
       Role: arn:aws:iam::761296697268:role/service-role/AwsLambdaPipeline
-      Name: aws-deploy-demo-generate-input-parameters
