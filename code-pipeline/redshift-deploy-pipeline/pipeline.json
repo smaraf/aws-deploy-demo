@@ -1,0 +1,67 @@
+{
+  "pipeline": {
+      "roleArn": "arn:aws:iam::761296697268:role/AWS-CodePipeline-Service",
+      "stages": [
+          {
+              "name": "Source",
+              "actions": [
+                  {
+                      "inputArtifacts": [],
+                      "name": "Source",
+                      "actionTypeId": {
+                          "category": "Source",
+                          "owner": "ThirdParty",
+                          "version": "1",
+                          "provider": "GitHub"
+                      },
+                      "outputArtifacts": [
+                          {
+                              "name": "aws-deploy-demo"
+                          }
+                      ],
+                      "configuration": {
+                          "Owner": "smaraf",
+                          "Repo": "aws-deploy-demo",
+                          "PollForSourceChanges": "false",
+                          "Branch": "master",
+                          "OAuthToken": "[PUT_IN_OAUTH_VALUE]"
+                      },
+                      "runOrder": 1
+                  }
+              ]
+          },
+          {
+              "name": "Development",
+              "actions": [
+                  {
+                      "inputArtifacts": [
+                          {
+                              "name": "aws-deploy-demo"
+                          }
+                      ],
+                      "name": "redshift-test-dev",
+                      "actionTypeId": {
+                          "category": "Deploy",
+                          "owner": "AWS",
+                          "version": "1",
+                          "provider": "CloudFormation"
+                      },
+                      "outputArtifacts": [],
+                      "configuration": {
+                          "StackName": "redshift-test-dev",
+                          "ActionMode": "CREATE_UPDATE",
+                          "RoleArn": "arn:aws:iam::761296697268:role/AWS-CloudFormation",
+                          "TemplatePath": "aws-deploy-demo::cloud-formation/redshift.json"
+                      },
+                      "runOrder": 1
+                  }
+              ]
+          }
+      ],
+      "artifactStore": {
+          "type": "S3",
+          "location": "codepipeline-us-east-1-93405015225"
+      },
+      "name": "redshift-deploy-pipeline-v2"
+  }
+}
