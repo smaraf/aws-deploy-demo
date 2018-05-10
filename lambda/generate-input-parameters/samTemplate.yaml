@@ -1,0 +1,13 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Generates stack parameters for an data analytics stack
+Resources:
+  GenerateInputParametersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs6.10
+      CodeUri: ./
+      Role: arn:aws:iam::761296697268:role/service-role/AwsLambdaPipeline
+      Name: aws-deploy-demo-generate-input-parameters
