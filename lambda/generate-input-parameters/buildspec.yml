@@ -3,7 +3,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - aws cloudformation package --template-file samTemplate.yaml --s3-bucket aws-deploy-demo 
+      - aws cloudformation package --template-file lambda/generate-input-parameters/samTemplate.yaml --s3-bucket aws-deploy-demo 
                                    --output-template-file outputSamTemplate.yaml
 artifacts:
   type: zip
