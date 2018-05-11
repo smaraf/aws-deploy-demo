@@ -1,11 +1,11 @@
-[] Create AWS CLI scripts for defining the pipelines
 [] Script Out IAM Roles (Cloud Formation or AWS CLI)
+[] Add more cluster configuration in pipeline
 [] Add pipeline for removing stack
 [] Figure out proper output artifact from lambdas
-[] Add more cluster configuration in pipeline
 [] Check Out AWS Glue for ETL: https://console.aws.amazon.com/glue/home?region=us-east-1#get-started:
 [] Check Out AWS Data Pipeline: https://console.aws.amazon.com/datapipeline/home?region=us-east-1#FirstRunPlace:
 [] Figure out how to handle sensitive values
 
 DONE:
 [x] Create Pipeline for deploying the lambdas: https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
+[x] Create AWS CLI scripts for defining the pipelines

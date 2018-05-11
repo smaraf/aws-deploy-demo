@@ -1,0 +1,119 @@
+{
+    "pipeline": {
+        "roleArn": "arn:aws:iam::761296697268:role/AWS-CodePipeline-Service", 
+        "stages": [
+            {
+                "name": "Source", 
+                "actions": [
+                    {
+                        "inputArtifacts": [], 
+                        "name": "Source", 
+                        "actionTypeId": {
+                            "category": "Source", 
+                            "owner": "ThirdParty", 
+                            "version": "1", 
+                            "provider": "GitHub"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "MyApp"
+                            }
+                        ], 
+                        "configuration": {
+                            "Owner": "smaraf", 
+                            "Repo": "aws-deploy-demo", 
+                            "PollForSourceChanges": "false", 
+                            "Branch": "master", 
+                            "OAuthToken": "[PUT_IN_OAUTH_VALUE]"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "Build", 
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "MyApp"
+                            }
+                        ], 
+                        "name": "CodeBuild", 
+                        "actionTypeId": {
+                            "category": "Build", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CodeBuild"
+                        }, 
+                        "outputArtifacts": [
+                            {
+                                "name": "MyAppBuild"
+                            }
+                        ], 
+                        "configuration": {
+                            "ProjectName": "lambda-build-demo"
+                        }, 
+                        "runOrder": 1
+                    }
+                ]
+            }, 
+            {
+                "name": "Staging", 
+                "actions": [
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "MyAppBuild"
+                            }
+                        ], 
+                        "name": "LambdaDemoStack", 
+                        "actionTypeId": {
+                            "category": "Deploy", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CloudFormation"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "ActionMode": "CHANGE_SET_REPLACE", 
+                            "ChangeSetName": "LambdaDemoChangeSet", 
+                            "RoleArn": "arn:aws:iam::761296697268:role/AWS-CloudFormation-LambdaExecute", 
+                            "Capabilities": "CAPABILITY_IAM", 
+                            "StackName": "LambdaDemoStack", 
+                            "TemplatePath": "MyAppBuild::outputSamTemplate.yaml"
+                        }, 
+                        "runOrder": 1
+                    }, 
+                    {
+                        "inputArtifacts": [
+                            {
+                                "name": "MyAppBuild"
+                            }
+                        ], 
+                        "name": "ExecuteChangeSet", 
+                        "actionTypeId": {
+                            "category": "Deploy", 
+                            "owner": "AWS", 
+                            "version": "1", 
+                            "provider": "CloudFormation"
+                        }, 
+                        "outputArtifacts": [], 
+                        "configuration": {
+                            "StackName": "LambdaDemoStack", 
+                            "ActionMode": "CHANGE_SET_EXECUTE", 
+                            "ChangeSetName": "LambdaDemoChangeSet"
+                        }, 
+                        "runOrder": 2
+                    }
+                ]
+            }
+        ], 
+        "artifactStore": {
+            "type": "S3", 
+            "location": "codepipeline-us-east-1-93405015225"
+        }, 
+        "name": "lambda-deploy-pipeline", 
+        "version": 1
+    }
+}
