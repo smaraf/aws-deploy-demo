@@ -8,13 +8,14 @@
 # - This script is assuming the region is configured globally using aws configure.
  
  {
-   aws codepipeline create-pipeline --cli-input-json file://pipeline.json -OAuthToken
+   aws codepipeline create-pipeline --cli-input-json file://pipeline.json
  } ||
  { 
    aws codepipeline update-pipeline --cli-input-json file://pipeline.json
  }
 
-# aws codepipeline get-pipeline --name redshift-deploy-pipeline --region us-east-1
+# Use the following command to get the details of a pipeline:
+# aws codepipeline get-pipeline --name redshift-deploy-pipeline
 
 #TODO: - use secure value for OAUTH token
 #TODO: Script assumes s3 bucket, IAM roles exist. Create cloud formation script for setting up

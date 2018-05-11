@@ -62,6 +62,6 @@
           "type": "S3",
           "location": "codepipeline-us-east-1-93405015225"
       },
-      "name": "redshift-deploy-pipeline-v2"
+      "name": "redshift-deploy-pipeline"
   }
 }
