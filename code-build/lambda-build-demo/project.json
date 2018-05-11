@@ -1,0 +1,33 @@
+{
+  "timeoutInMinutes": 60,
+  "name": "lambda-build",
+  "serviceRole":
+    "arn:aws:iam::761296697268:role/service-role/code-build-aws-deploy-demo-service-role",
+  "tags": [],
+  "artifacts": {
+    "namespaceType": "BUILD_ID",
+    "packaging": "NONE",
+    "type": "S3",
+    "location": "aws-deploy-demo",
+    "name": "/"
+  },
+  "cache": {
+    "type": "NO_CACHE"
+  },
+  "environment": {
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "privilegedMode": false,
+    "image": "aws/codebuild/nodejs:8.11.0",
+    "type": "LINUX_CONTAINER",
+    "environmentVariables": []
+  },
+  "source": {
+    "buildspec": "lambda/generate-input-parameters/buildspec.yml",
+    "gitCloneDepth": 0,
+    "type": "GITHUB",
+    "location": "https://github.com/smaraf/aws-deploy-demo.git",
+    "insecureSsl": false
+  },
+  "badgeEnabled": false,
+  "encryptionKey": "arn:aws:kms:us-east-1:761296697268:alias/aws/s3"
+}

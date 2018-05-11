@@ -52,7 +52,7 @@
                             }
                         ], 
                         "configuration": {
-                            "ProjectName": "lambda-build-demo"
+                            "ProjectName": "lambda-build"
                         }, 
                         "runOrder": 1
                     }

@@ -5,6 +5,7 @@
 [] Check Out AWS Glue for ETL: https://console.aws.amazon.com/glue/home?region=us-east-1#get-started:
 [] Check Out AWS Data Pipeline: https://console.aws.amazon.com/datapipeline/home?region=us-east-1#FirstRunPlace:
 [] Figure out how to handle sensitive values
+[] Parametrized ARNs to replace variables like RegionId, AccountId 
 
 DONE:
 [x] Create Pipeline for deploying the lambdas: https://docs.aws.amazon.com/lambda/latest/dg/build-pipeline.html
